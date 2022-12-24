@@ -1,0 +1,20 @@
+{
+    "name": "BardicPlatformerEditor",
+    "rootNamespace": "BardicBytes.BardicPlatformerEditor",
+    "references": [
+        "GUID:efe3a70e628f23341b93b67882079d66",
+        "GUID:9356461224e33514bb7e9846e1e3382e",
+        "GUID:e4b1e54a44040dc4d9191bdf28692258"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,16 @@
+{
+    "name": "BardicPlatformer",
+    "rootNamespace": "BardicBytes.BardicPlatformer",
+    "references": [
+        "GUID:efe3a70e628f23341b93b67882079d66"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

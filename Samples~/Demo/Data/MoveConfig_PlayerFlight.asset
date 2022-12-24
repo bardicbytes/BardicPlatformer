@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 631a04ceaecd6d6498513fe30ed523bf, type: 3}
+  m_Name: MoveConfig_PlayerFlight
+  m_EditorClassIdentifier: 
+  <MaxSpeed>k__BackingField: 10
+  <MoveForce>k__BackingField: 3
+  <JumpPower>k__BackingField: 10
+  <JumpOnHold>k__BackingField: 1
+  <FastFall>k__BackingField: 0
+  <AirStop>k__BackingField: 1
+  <CoyoteTime>k__BackingField: 1
+  <AirJumpMinHeight>k__BackingField: 0.15
+  <BunnyBoost>k__BackingField: 1
+  <MaxAirJumps>k__BackingField: 3
+  <AirControl>k__BackingField: 1
+  <Material>k__BackingField: {fileID: 13400000, guid: a9b7542f283aec74ba34b74402c09755, type: 2}
+  <PrecisionMovementEnabled>k__BackingField: 1
+  <CanFly>k__BackingField: 1
+  <RigidbodyConfig>k__BackingField:
+    useGravity: 0
+    isKinematic: 0
+    mass: 5
+    drag: 0.1
+    angularDrag: 0.1
