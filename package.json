@@ -8,6 +8,7 @@
     "Unity",
     "Framework",
     "BardicBytes",
+    "BardicFramework",
 	"Platformer"
   ],"samples": [
         {
@@ -20,5 +21,10 @@
     "name": "Bardic Bytes LLC",
     "email": "support@bardicbytes.com",
     "url": "https://www.bardicbytes.com"
+  },
+  {
+  "dependencies": {
+    "com.bardicbytes.bardicframework": "https://github.com/bardicbytes/BardicFramework.git"
   }
+}
 }
