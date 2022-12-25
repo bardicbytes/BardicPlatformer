@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 631a04ceaecd6d6498513fe30ed523bf, type: 3}
-  m_Name: MoveConfig_Simple
+  m_Name: MoveConfig_PlayerDoubleJump
   m_EditorClassIdentifier: 
   <MaxSpeed>k__BackingField: 5
   <MoveForce>k__BackingField: 5
   <JumpPower>k__BackingField: 5
   <JumpOnHold>k__BackingField: 0
-  <FastFall>k__BackingField: 0
-  <AirStop>k__BackingField: 0
+  <FastFall>k__BackingField: 1
+  <AirStop>k__BackingField: 1
   <CoyoteTime>k__BackingField: 0.1
   <AirJumpMinHeight>k__BackingField: 0.15
   <BunnyBoost>k__BackingField: 1
-  <MaxAirJumps>k__BackingField: 0
+  <MaxAirJumps>k__BackingField: 1
   <AirControl>k__BackingField: 0.25
   <Material>k__BackingField: {fileID: 13400000, guid: a9b7542f283aec74ba34b74402c09755, type: 2}
   <PrecisionMovementEnabled>k__BackingField: 1
@@ -32,3 +32,4 @@ MonoBehaviour:
     mass: 5
     drag: 0
     angularDrag: 0
+  <JumpSFX>k__BackingField: {fileID: 11400000, guid: 75169210d1d88464192104d8b7eac55d, type: 2}

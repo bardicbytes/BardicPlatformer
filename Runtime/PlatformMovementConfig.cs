@@ -1,4 +1,5 @@
 //alex@bardicbytes.com
+using BardicBytes.BardicFramework.Effects;
 using BardicBytes.BardicFramework.EventVars;
 using BardicBytes.BardicFramework.Physics;
 using UnityEngine;
@@ -40,6 +41,9 @@ namespace BardicBytes.BardicPlatformer
         public bool CanFly { get; protected set; }
         [field: SerializeField]
         public RigidbodyConfig RigidbodyConfig { get; protected set; }
+
+        [field: SerializeField]
+        public SoundEffect JumpSFX { get; protected set; }
 
         public float SqrMaxSpeed => MaxSpeed * MaxSpeed;
         public ForceMode ForceMode => PrecisionMovementEnabled ? ForceMode.VelocityChange : ForceMode.Acceleration;

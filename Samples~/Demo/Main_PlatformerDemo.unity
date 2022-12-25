@@ -270,7 +270,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DeactivateOnSelfDestruct>k__BackingField:
-    editorName: 
     module: {fileID: 0}
     fallbackValue: 0
     srcEV: {fileID: 0}
@@ -282,7 +281,7 @@ MonoBehaviour:
     enableWire: 1
     color: {r: 1, g: 1, b: 1.5, a: 1}
     radius: 0.5
-  compCache: f0c3827768064f4f3014c16b
+  compCache: 20fa696ee0c0cf6000ba3a6f
   <AllComponents>k__BackingField:
   - {fileID: 238088784}
   - {fileID: 238088782}
@@ -759,7 +758,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DeactivateOnSelfDestruct>k__BackingField:
-    editorName: 
     module: {fileID: 0}
     fallbackValue: 0
     srcEV: {fileID: 0}
@@ -771,7 +769,7 @@ MonoBehaviour:
     enableWire: 1
     color: {r: 1, g: 1, b: 1.5, a: 1}
     radius: 0.5
-  compCache: f0c38277e0324f4f
+  compCache: 20fa696ee8bd5d6a
   <AllComponents>k__BackingField:
   - {fileID: 481316101}
   - {fileID: 481316099}
@@ -1453,7 +1451,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DeactivateOnSelfDestruct>k__BackingField:
-    editorName: 
     module: {fileID: 0}
     fallbackValue: 0
     srcEV: {fileID: 0}
@@ -1465,7 +1462,7 @@ MonoBehaviour:
     enableWire: 1
     color: {r: 1, g: 1, b: 1, a: 1}
     radius: 0.5
-  compCache: f0c38277f0248077f8854071601eee76708cec76
+  compCache: 20fa696ec09b686ef8e3b67560685b6ab080857b
   <AllComponents>k__BackingField:
   - {fileID: 1022183478}
   - {fileID: 1022183477}
@@ -1769,7 +1766,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DeactivateOnSelfDestruct>k__BackingField:
-    editorName: 
     module: {fileID: 0}
     fallbackValue: 0
     srcEV: {fileID: 0}
@@ -1781,7 +1777,7 @@ MonoBehaviour:
     enableWire: 1
     color: {r: 1, g: 0, b: 0, a: 0.50980395}
     radius: 1.5
-  compCache: f0c382773014c16b
+  compCache: 20fa696e00ba3a6f
   <AllComponents>k__BackingField:
   - {fileID: 1177831744}
   - {fileID: 1177831745}
@@ -2237,6 +2233,7 @@ GameObject:
   - component: {fileID: 2024272911}
   - component: {fileID: 2024272910}
   - component: {fileID: 2024272916}
+  - component: {fileID: 2024272921}
   - component: {fileID: 2024272920}
   m_Layer: 0
   m_Name: Player
@@ -2258,6 +2255,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Actor>k__BackingField: {fileID: 2024272913}
+  jumpButtonName: Jump
+  action1ButtonName: Fire1
+  attack1: {fileID: 11400000, guid: c877bcfd3d19f4942a3cadcc694995d7, type: 2}
 --- !u!114 &2024272911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2272,7 +2272,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Actor>k__BackingField: {fileID: 2024272913}
   <ConfigField>k__BackingField:
-    editorName: Error. Misconfigured
     module: {fileID: 2024272911}
     fallbackValue: {fileID: 11400000, guid: aa960bed9e8096245bffb090b4180dad, type: 2}
     srcEV: {fileID: 11400000, guid: 3bba8e79d535ec7479fa6f3a48c7dbc7, type: 2}
@@ -2297,29 +2296,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DeactivateOnSelfDestruct>k__BackingField:
-    editorName: 
     module: {fileID: 0}
     fallbackValue: 0
     srcEV: {fileID: 0}
   <DebugEvent>k__BackingField: {fileID: 11400000, guid: 0ff6a14da6bbb4546b0d8f35bb75b9a2, type: 2}
   <DebugGizmo>k__BackingField:
     cube: 0
-    sphere: 1
-    solidWhenSelected: 1
-    enableWire: 1
+    sphere: 0
+    solidWhenSelected: 0
+    enableWire: 0
     color: {r: 1, g: 1, b: 1, a: 1}
-    radius: 0.5
-  compCache: f0c3827720742c5e40762a363014c16b70652a5e406e2a5e00192b5ef0044f4f
+    radius: 0.75
+  compCache: 20fa696ee013a16f00ba3a6f9035537290a7dd6b38133b6ff8c55d6ab012a946c0c6de6d
   <AllComponents>k__BackingField:
   - {fileID: 2024272915}
   - {fileID: 2024272914}
-  - {fileID: 2024272919}
   - {fileID: 2024272918}
+  - {fileID: 2024272919}
   - {fileID: 2024272911}
   - {fileID: 2024272910}
   - {fileID: 2024272916}
+  - {fileID: 2024272921}
   - {fileID: 2024272920}
-  compIsModule: 0000010101010100
+  compIsModule: 000001010101010100
 --- !u!54 &2024272914
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2349,6 +2348,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 67155359}
+  - {fileID: 2113708134}
   - {fileID: 354209234}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -2367,7 +2367,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Actor>k__BackingField: {fileID: 2024272913}
   <Height>k__BackingField:
-    editorName: Error. Misconfigured
     module: {fileID: 2024272916}
     fallbackValue: -5
     srcEV: {fileID: 0}
@@ -2416,7 +2415,7 @@ MonoBehaviour:
         actorInstance: {fileID: 0}
         <Src>k__BackingField: {fileID: 11400000, guid: 3bba8e79d535ec7479fa6f3a48c7dbc7, type: 2}
         <StringValue>k__BackingField: 
-        <IntValue>k__BackingField: 1
+        <IntValue>k__BackingField: 0
         <FloatValue>k__BackingField: 0
         <BoolValue>k__BackingField: 0
         <Vector3Value>k__BackingField: {x: 0, y: 0, z: 0}
@@ -2436,3 +2435,159 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHeight: 0
+--- !u!114 &2024272921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024272909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 049d3413e77a01e449af17f500d0d2e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Actor>k__BackingField: {fileID: 2024272913}
+  serializedInputSource: {fileID: 2024272910}
+  <AttackPower>k__BackingField:
+    module: {fileID: 2024272921}
+    fallbackValue: 5
+    srcEV: {fileID: 0}
+  <AttackFXTarget>k__BackingField: {fileID: 2113708134}
+--- !u!1 &2105628148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2105628150}
+  - component: {fileID: 2105628149}
+  m_Layer: 0
+  m_Name: SpecialEffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2105628149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105628148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577b5741f24d69541983bad2d9872b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxSourcePrefab: {fileID: 461378151091728400, guid: 3190a093fb90aa746be215268e6a6380, type: 3}
+  musicSourcePrefab: {fileID: 461378151091728400, guid: 3190a093fb90aa746be215268e6a6380, type: 3}
+  musicSourceChangeEventVar: {fileID: 0}
+  stopMusicChannelEv: {fileID: 0}
+  bank: {fileID: 11400000, guid: 48e1596ebcb70344cb261ca37a2d6698, type: 2}
+  skipBeat: {fileID: 0}
+  min2DBlend: 0.25
+  musicChannels: 4
+  fadeOutDur: 1
+  debugMsg: {fileID: 0}
+--- !u!4 &2105628150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105628148}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.020750761, y: 0.8495839, z: 0.4126036}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2113708133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2113708134}
+  - component: {fileID: 2113708136}
+  - component: {fileID: 2113708135}
+  m_Layer: 0
+  m_Name: atkSrc
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2113708134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113708133}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.628}
+  m_LocalScale: {x: 0.38128, y: 0.38128, z: 0.38128}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2024272915}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &2113708135
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113708133}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &2113708136
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113708133}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}

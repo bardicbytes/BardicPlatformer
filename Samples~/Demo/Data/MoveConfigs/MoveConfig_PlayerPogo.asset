@@ -32,3 +32,4 @@ MonoBehaviour:
     mass: 5
     drag: 0
     angularDrag: 0
+  <JumpSFX>k__BackingField: {fileID: 11400000, guid: 75169210d1d88464192104d8b7eac55d, type: 2}

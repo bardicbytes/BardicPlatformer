@@ -137,7 +137,7 @@ namespace BardicBytes.BardicPlatformer
 
         protected override void ActorUpdate()
         {
-            if (InputSource.InputData.jumpDown || (InputSource.InputData.jumpHeld && Config.JumpOnHold))
+            if (InputSource.MovementInputData.jumpDown || (InputSource.MovementInputData.jumpHeld && Config.JumpOnHold))
             {
                 MakeJumpRequest();
             }
@@ -159,7 +159,7 @@ namespace BardicBytes.BardicPlatformer
             if (!groundColliders.Contains(c)) groundColliders.Add(c);
 
             //bunnyhop
-            if (hasJumpReq && InputSource.InputData.jumpHeld)
+            if (hasJumpReq && InputSource.MovementInputData.jumpHeld)
             {
                 MakeJumpRequest();
             }
@@ -179,7 +179,7 @@ namespace BardicBytes.BardicPlatformer
             sb.AppendLineFormat("-AirJumps: {0}/{1}", AirJumpsMade, Config.MaxAirJumps);
             sb.AppendLineFormat("-Should AJ {0}", ShouldAirJump);
             sb.AppendLine("");
-            sb.AppendLineFormat("-Input Dir: {0}", InputSource.InputData.direction);
+            sb.AppendLineFormat("-Input Dir: {0}", InputSource.MovementInputData.direction);
             sb.AppendLineFormat("-MayApplyMoveForce: {0}", MayApplyMoveForce);
             sb.AppendLineFormat("-MoveForce: {0}", moveForce);
             sb.AppendLineFormat("-Velocity: {0}, {1}", Actor.Rigidbody.velocity.x.ToString("00.00"), Actor.Rigidbody.velocity.y.ToString("00.00"));
@@ -210,13 +210,10 @@ namespace BardicBytes.BardicPlatformer
             }
         }
 
-        
-
         protected virtual void DoMovement()
         {
             otherDebugInfo = "DoMovement";
 
-            //
             var airMaxSpeed = Config.MaxSpeed * Config.AirControl;
 
             var effMaxSpeed = IsGrounded || Config.CanFly ? Config.MaxSpeed : airMaxSpeed;
@@ -227,7 +224,7 @@ namespace BardicBytes.BardicPlatformer
             b = invSpeedRatio * 9 + 1;
             speedControlMult = Mathf.Log10(/*1 to 10*/b);//0-1, f(5) = .699
 
-            var dir = InputSource.InputData.direction;
+            var dir = InputSource.MovementInputData.direction;
             moveForce = dir * Config.MoveForce * speedControlMult;
 
             //limit lateral control in air
@@ -246,7 +243,7 @@ namespace BardicBytes.BardicPlatformer
             //eliminate lateral movement when fastfalling
             if (!IsGrounded && Config.FastFall
                 && Mathf.Abs(Actor.Rigidbody.velocity.x) > .001f
-                && Mathf.Abs(dir.x) < 0
+                && Mathf.Abs(dir.x) == 0
                 && dir.y < 0)
             {
                 v.x = 0;
@@ -323,7 +320,7 @@ namespace BardicBytes.BardicPlatformer
 
                 var jumpForce = new Vector3(inputX / 1, 1, 0).normalized * Config.JumpPower;
                 if (!isAirJump
-                    && InputSource.InputData.jumpHeld
+                    && InputSource.MovementInputData.jumpHeld
                     && isJumping)
                 {
                     jumpForce.y *= Config.BunnyBoost;
@@ -339,11 +336,10 @@ namespace BardicBytes.BardicPlatformer
                 }
                 Actor.Rigidbody.velocity = v;
                 Debug.Log(Time.frameCount + "f. Jump! " + Actor.Rigidbody.velocity + ", AJ?" + isAirJump + ", J?" + isJumping + ", G? " + IsGrounded);
+                Config.JumpSFX.Play();
                 isJumping = true;
                 DoGroundLost();
             }
         }
-
-        
     }
 }
