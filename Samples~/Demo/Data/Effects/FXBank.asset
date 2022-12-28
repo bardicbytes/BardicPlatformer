@@ -15,5 +15,6 @@ MonoBehaviour:
   soundEffectBank:
   - {fileID: 11400000, guid: 7c75b6f23461d8744840c76b83682031, type: 2}
   - {fileID: 11400000, guid: 75169210d1d88464192104d8b7eac55d, type: 2}
+  - {fileID: 11400000, guid: 5a5628b7287e2434eb03f7084b822787, type: 2}
   specialEffectBank:
   - {fileID: 11400000, guid: d4d773b975acbb1498a7b830287c8765, type: 2}

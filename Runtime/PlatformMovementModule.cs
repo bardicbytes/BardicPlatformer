@@ -335,7 +335,7 @@ namespace BardicBytes.BardicPlatformer
                     if (v.x < 0) v.x = -Config.MaxSpeed;
                 }
                 Actor.Rigidbody.velocity = v;
-                Debug.Log(Time.frameCount + "f. Jump! " + Actor.Rigidbody.velocity + ", AJ?" + isAirJump + ", J?" + isJumping + ", G? " + IsGrounded);
+                //Debug.Log(Time.frameCount + "f. Jump! " + Actor.Rigidbody.velocity + ", AJ?" + isAirJump + ", J?" + isJumping + ", G? " + IsGrounded);
                 Config.JumpSFX.Play();
                 isJumping = true;
                 DoGroundLost();
