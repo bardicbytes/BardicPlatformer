@@ -1,41 +1,80 @@
 using BardicBytes.BardicFramework;
+using BardicBytes.BardicFramework.Effects;
+using BardicBytes.BardicFramework.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace BardicBytes.BardicPlatformerSamples
 {
-    [RequireComponent(typeof(TagModule))]
-    public class Portal : ActorModule
+    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(BoxCollider))]
+    public class Portal : ActorModule, IBardicEditorable
     {
         [field: SerializeField]
-        public Vector3 TargetA { get; protected set; } = default;
-        [field:SerializeField]
-        public Vector3 TargetB { get; protected set; } = default;
+        public Portal Target { get; protected set; } = default;
         [field: SerializeField]
-        public Color Color { get; protected set; } = Color.white;
-        [field: SerializeField]
-        public ActorTag PortalableActors { get; protected set; }
+        public SpecialEffect BlinkOut { get; protected set; } = default;
 
-        private void Reset()
+        public bool DrawOtherFields => true;
+
+        string[] IBardicEditorable.EditorFieldNames => new string[] { };
+
+        bool IBardicEditorable.DrawOtherFields => true;
+
+        private Actor teleportingActor = null;
+        private BoxCollider boxCollider = null;
+        protected override void OnValidate()
         {
-            TargetA = transform.position;
-            TargetB = transform.position + Vector3.right*5f;
+            base.OnValidate();
+            if (boxCollider == null) boxCollider = GetComponent<BoxCollider>();
+            else boxCollider.isTrigger = true;
+
+            if(Target != null && Target.Target == null)
+            {
+                Target.Target = this;
+            }
         }
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color;
-            Gizmos.DrawLine(TargetA, TargetB);
+            if (Target == null) return;
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(Target.transform.position, transform.position);
+
+            Gizmos.color = teleportingActor == null ? Color.green : Color.red;
+            Gizmos.DrawSphere(transform.position, .1f);
         }
 
-        protected override void ActorUpdate()
+        private void OnTriggerEnter(Collider other)
         {
-            for(int i = 0; i < PortalableActors.ActiveActors.Count; i++)
+            var actor = other.attachedRigidbody?.GetComponent<Actor>();
+            if(actor == null)
             {
-                var a = PortalableActors.ActiveActors[i];
-                
+                //if(other.attachedRigidbody) Debug.Log("Portal Trigger, no actor: "+other.attachedRigidbody.gameObject.name);
+                //else Debug.Log("Portal Trigger: no rigidbody"+other.gameObject.name);
+                return;
+            }
+
+            if (actor == teleportingActor)
+            {
+                return;
+            }
+
+            actor.transform.position = Target.transform.position;
+            Target.teleportingActor = actor;
+            BlinkOut?.Play(actor.transform.position);
+            BlinkOut?.Play(Target.transform.position);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            var actor = other.attachedRigidbody.GetComponent<Actor>();
+            if (teleportingActor == actor)
+            {
+                teleportingActor = null;
             }
         }
+
     }
 }

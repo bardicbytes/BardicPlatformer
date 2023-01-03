@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f9e3346a9b471f44b27bd1cfb2e9cde, type: 3}
-  m_Name: SFX_Attack
+  m_Name: SFX_Portal
   m_EditorClassIdentifier: 
   untypedEvent:
     m_PersistentCalls:
@@ -38,15 +38,15 @@ MonoBehaviour:
   invokeNewListeners: 0
   raiseOnInit: 0
   clips:
-  - {fileID: 8300000, guid: e15c6d7755e064345a8a2a7bdfc0abaf, type: 3}
-  volume: 0.4
+  - {fileID: 8300000, guid: bc90054ea2c040a41bd45d64ee34a9e8, type: 3}
+  volume: 0.75
   force2d: 0
   loop: 0
   isMusic: 0
   autoIncrementAfterLoops: 2
   musicChannel: 0
   musicAdjustments: []
-  randomPitchRange: 0.1
+  randomPitchRange: 0.05
   pitchOffset: 0
   selectionMode: 0
   minInterval: 0

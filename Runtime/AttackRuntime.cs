@@ -18,6 +18,5 @@ namespace BardicBytes.BardicPlatformer
             action.attackFX.Play(actionPerformer.AttackFXTarget);
             Debug.Log("Attack! " + action.name + " " + actionPerformer.AttackPower.Value);
         }
-
     }
 }

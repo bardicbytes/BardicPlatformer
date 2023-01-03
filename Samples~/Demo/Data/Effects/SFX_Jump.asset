@@ -39,14 +39,14 @@ MonoBehaviour:
   raiseOnInit: 0
   clips:
   - {fileID: 8300000, guid: 6c29be1f65f19694cbcb0143aa5b6c41, type: 3}
-  volume: 0.75
+  volume: 0.5
   force2d: 0
   loop: 0
   isMusic: 0
   autoIncrementAfterLoops: 2
   musicChannel: 0
   musicAdjustments: []
-  randomPitchRange: 0
+  randomPitchRange: 0.05
   pitchOffset: 0
   selectionMode: 0
   minInterval: 0

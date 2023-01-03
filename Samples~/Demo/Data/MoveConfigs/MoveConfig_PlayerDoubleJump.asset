@@ -15,16 +15,18 @@ MonoBehaviour:
   <MaxSpeed>k__BackingField: 5
   <MoveForce>k__BackingField: 5
   <JumpPower>k__BackingField: 5
+  <JumpHoldPower>k__BackingField: 5
   <JumpOnHold>k__BackingField: 0
+  <MaxJumpHeight>k__BackingField: 5
   <FastFall>k__BackingField: 1
   <AirStop>k__BackingField: 1
   <CoyoteTime>k__BackingField: 0.1
   <AirJumpMinHeight>k__BackingField: 0.15
   <BunnyBoost>k__BackingField: 1
   <MaxAirJumps>k__BackingField: 1
+  <LimitHeightForRunningJumps>k__BackingField: 1
   <AirControl>k__BackingField: 0.25
   <Material>k__BackingField: {fileID: 13400000, guid: a9b7542f283aec74ba34b74402c09755, type: 2}
-  <PrecisionMovementEnabled>k__BackingField: 1
   <CanFly>k__BackingField: 0
   <RigidbodyConfig>k__BackingField:
     useGravity: 1

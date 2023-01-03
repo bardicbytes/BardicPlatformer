@@ -15,9 +15,13 @@ namespace BardicBytes.BardicPlatformer
         [field: SerializeField]
         public float MoveForce { get; protected set; } = 5;
         [field: SerializeField]
-        public float JumpPower { get; protected set; } = 5;
+        public float JumpPower { get; protected set; } = 20;
+        [field: SerializeField]
+        public float JumpHoldPower { get; protected set; } = 8;
         [field: SerializeField]
         public bool JumpOnHold { get; protected set; } = false;
+        [field: SerializeField]
+        public float MaxJumpHeight { get; protected set; } = 2.5f;
         [field: SerializeField]
         public bool FastFall { get; protected set; } = false;
         [field: SerializeField]
@@ -31,12 +35,12 @@ namespace BardicBytes.BardicPlatformer
         [field: SerializeField]
         public int MaxAirJumps { get; protected set; } = 0;
         [field: SerializeField]
+        public bool LimitHeightForRunningJumps { get; protected set; } = true;
+        [field: SerializeField]
         public float AirControl { get; protected set; } = 0;
 
         [field: SerializeField]
         public PhysicMaterial Material { get; protected set; }
-        [field: SerializeField]
-        public bool PrecisionMovementEnabled { get; protected set; }
         [field: SerializeField]
         public bool CanFly { get; protected set; }
         [field: SerializeField]
@@ -46,7 +50,6 @@ namespace BardicBytes.BardicPlatformer
         public SoundEffect JumpSFX { get; protected set; }
 
         public float SqrMaxSpeed => MaxSpeed * MaxSpeed;
-        public ForceMode ForceMode => PrecisionMovementEnabled ? ForceMode.VelocityChange : ForceMode.Acceleration;
     
         public void Apply(Rigidbody rb, params Collider[] colliders)
         {
