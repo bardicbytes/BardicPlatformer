@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace BardicBytes.BardicPlatformerEditor
+namespace BardicBytes.BardicPlatformerSamplesEditor
 {
     [CustomEditor(typeof(Portal))]
     public class PortalEditor : BardicEditor<Portal>

@@ -1,0 +1,19 @@
+{
+    "name": "BardicPlatformerSamplesEditor",
+    "rootNamespace": "BardicBytes.BardicPlatformerSamplesEditor",
+    "references": [
+        "GUID:efe3a70e628f23341b93b67882079d66",
+        "GUID:e4b1e54a44040dc4d9191bdf28692258",
+        "GUID:7519944eafd5c424fb49d29a79c94d86",
+        "GUID:9356461224e33514bb7e9846e1e3382e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
