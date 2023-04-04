@@ -4,27 +4,26 @@
   "displayName": "Bardic Platformer",
   "description": "A package for developing action platformers with Unity.",
   "unity": "2022.1",
- "keywords": [
+  "keywords": [
     "Unity",
     "Framework",
     "BardicBytes",
     "BardicFramework",
-	"Platformer"
-  ],"samples": [
-        {
-            "displayName": "Demo",
-            "description": "A simple demonstration of the platformer package in use.",
-            "path": "Samples~/Demo"
-        }
-    ],
+    "Platformer"
+  ],
+  "samples": [
+    {
+      "displayName": "Demo",
+      "description": "A simple demonstration of the platformer package in use.",
+      "path": "Samples~/Demo"
+    }
+  ],
   "author": {
     "name": "Bardic Bytes LLC",
     "email": "support@bardicbytes.com",
     "url": "https://www.bardicbytes.com"
   },
-  {
   "dependencies": {
     "com.bardicbytes.bardicframework": "https://github.com/bardicbytes/BardicFramework.git"
   }
-}
 }
