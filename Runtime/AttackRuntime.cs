@@ -1,6 +1,4 @@
 using BardicBytes.BardicFramework.Actions;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BardicBytes.BardicPlatformer
@@ -8,7 +6,7 @@ namespace BardicBytes.BardicPlatformer
     [System.Serializable]
     public class AttackRuntime : GenericActionRuntime<AttackAction, AttackPerformer, AttackRuntime>
     {
-        public AttackRuntime(AttackAction action, AttackPerformer performer) : base(action,performer)
+        public AttackRuntime(AttackAction action, AttackPerformer performer) : base(action, performer)
         {
         }
 

@@ -1,9 +1,6 @@
 using BardicBytes.BardicFramework.Utilities;
 using BardicBytes.BardicFrameworkEditor;
 using BardicBytes.BardicPlatformerSamples;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -28,7 +25,7 @@ namespace BardicBytes.BardicPlatformerSamplesEditor
             {
                 Apply(taName);
             }
-            
+
             serializedObject.ApplyModifiedProperties();
 
             void Apply(string name)

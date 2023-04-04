@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 631a04ceaecd6d6498513fe30ed523bf, type: 3}
   m_Name: MoveConfig_PlayerDoubleJump
   m_EditorClassIdentifier: 
-  <MaxSpeed>k__BackingField: 5
-  <MoveForce>k__BackingField: 5
-  <JumpPower>k__BackingField: 5
-  <JumpHoldPower>k__BackingField: 5
+  <MaxSpeed>k__BackingField: 10
+  <MoveForce>k__BackingField: 20
+  <JumpPower>k__BackingField: 25
+  <JumpHoldPower>k__BackingField: 25
   <JumpOnHold>k__BackingField: 0
   <MaxJumpHeight>k__BackingField: 5
   <FastFall>k__BackingField: 1

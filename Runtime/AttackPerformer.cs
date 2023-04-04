@@ -13,12 +13,12 @@ namespace BardicBytes.BardicPlatformer
         [field: SerializeField]
         public FloatEventVar.Field AttackPower { get; protected set; } = default;
 
-        [field:SerializeField]
+        [field: SerializeField]
         public Transform AttackFXTarget { get; protected set; } = default;
 
         protected override void ActorUpdate()
         {
-            
+
             base.ActorUpdate();
         }
     }

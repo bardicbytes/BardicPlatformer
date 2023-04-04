@@ -1,8 +1,5 @@
 using BardicBytes.BardicFramework;
 using BardicBytes.BardicFramework.Effects;
-using BardicBytes.BardicFramework.Utilities;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BardicBytes.BardicPlatformerSamples
@@ -30,7 +27,7 @@ namespace BardicBytes.BardicPlatformerSamples
             if (boxCollider == null) boxCollider = GetComponent<BoxCollider>();
             else boxCollider.isTrigger = true;
 
-            if(Target != null && Target.Target == null)
+            if (Target != null && Target.Target == null)
             {
                 Target.Target = this;
             }
@@ -49,7 +46,7 @@ namespace BardicBytes.BardicPlatformerSamples
         private void OnTriggerEnter(Collider other)
         {
             var actor = other.attachedRigidbody?.GetComponent<Actor>();
-            if(actor == null)
+            if (actor == null)
             {
                 //if(other.attachedRigidbody) Debug.Log("Portal Trigger, no actor: "+other.attachedRigidbody.gameObject.name);
                 //else Debug.Log("Portal Trigger: no rigidbody"+other.gameObject.name);

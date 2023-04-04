@@ -1,13 +1,12 @@
 //alex@bardicbytes.com
 using BardicBytes.BardicFramework.Effects;
-using BardicBytes.BardicFramework.EventVars;
 using BardicBytes.BardicFramework.Physics;
 using UnityEngine;
 
 namespace BardicBytes.BardicPlatformer
 {
 
-    [CreateAssetMenu(menuName=Prefixes.Platformer+"Movement Config")]
+    [CreateAssetMenu(menuName = Prefixes.Platformer + "Movement Config")]
     public class PlatformMovementConfig : ScriptableObject
     {
         [field: SerializeField]
@@ -50,7 +49,7 @@ namespace BardicBytes.BardicPlatformer
         public SoundEffect JumpSFX { get; protected set; }
 
         public float SqrMaxSpeed => MaxSpeed * MaxSpeed;
-    
+
         public void Apply(Rigidbody rb, params Collider[] colliders)
         {
             rb.isKinematic = RigidbodyConfig.isKinematic;
@@ -58,7 +57,7 @@ namespace BardicBytes.BardicPlatformer
             rb.drag = RigidbodyConfig.drag;
             rb.angularDrag = RigidbodyConfig.angularDrag;
 
-            for(int i = 0; i < colliders.Length; i++)
+            for (int i = 0; i < colliders.Length; i++)
             {
                 colliders[i].sharedMaterial = Material;
             }

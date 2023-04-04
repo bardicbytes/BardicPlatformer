@@ -1,7 +1,4 @@
-using BardicBytes.BardicFramework.Effects;
 using BardicBytes.BardicPlatformer;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BardicBytes.BardicPlatformerSamples

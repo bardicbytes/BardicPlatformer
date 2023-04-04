@@ -1,11 +1,10 @@
-using System.Collections;
+using BardicBytes.BardicFramework.EventVars;
 using System.Collections.Generic;
 using UnityEngine;
-using BardicBytes.BardicFramework.EventVars;
 
 namespace BardicBytes.BardicPlatformer
 {
-    [CreateAssetMenu(menuName =Prefixes.Platformer+"EventVar: Movement Config")]
+    [CreateAssetMenu(menuName = Prefixes.Platformer + "EventVar: Movement Config")]
     public class PlatformMovementConfigEventVar : EvaluatingEventVar<int, PlatformMovementConfig>
     {
         [SerializeField]

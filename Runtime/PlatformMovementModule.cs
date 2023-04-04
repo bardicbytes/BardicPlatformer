@@ -1,6 +1,5 @@
 //alex@bardicbytes.com
 using BardicBytes.BardicFramework;
-using BardicBytes.BardicFramework.EventVars;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,16 +39,21 @@ namespace BardicBytes.BardicPlatformer
         private float groundLostTime = 0;
         private List<Collider> groundColliders;
 
+        private Collider groundHitCollider;
         private float distFromGround = 0;
         private Vector3 groundNormal;
+        
         private Vector2 moveForce;
         private float speedControlMultiplier;
         private float groundedHeight = 0f;
         private float maxHeightSinceLastGrounding = 0f;
 
+        private bool jumpReleasedSincePressed = false;
+
         private bool IsWithinCoyoteTime => !IsJumping && (Time.time - groundLostTime) <= Config.CoyoteTime;
         private float FeetY => Actor.transform.position.y;
         private bool ShouldAirJump => !IsGrounded
+                    && jumpReleasedSincePressed
                     && !IsWithinCoyoteTime
                     && distFromGround >= Config.AirJumpMinHeight
                     && AirJumpsMade < Config.MaxAirJumps;
@@ -57,9 +61,7 @@ namespace BardicBytes.BardicPlatformer
         /// <summary>
         /// Grounded or purposefully airborne AND we're not speeding
         /// </summary>
-        private bool MayApplyMoveForce => (IsGrounded || Config.CanFly || IsJumping)
-                    && Actor.Rigidbody.velocity.x + moveForce.x * Time.fixedDeltaTime < Config.MaxSpeed
-                    && Actor.Rigidbody.velocity.x + moveForce.x * Time.fixedDeltaTime > -Config.MaxSpeed;
+        private bool MayApplyMoveForce => (IsGrounded || Config.CanFly || IsJumping);
 
         private float LastJumpHeight => maxHeightSinceLastGrounding - groundedHeight;
 
@@ -98,41 +100,7 @@ namespace BardicBytes.BardicPlatformer
             base.OnEnable();
             groundColliders.Clear();
         }
-
-        protected virtual void OnCollisionEnter(Collision c)
-        {
-            CheckForLanding(c);
-        }
-
-
-        protected virtual void OnCollisionStay(Collision c)
-        {
-            CheckForLanding(c);
-        }
-
-        protected virtual void OnCollisionExit(Collision c)
-        {
-            if (groundColliders.Contains(c.collider)) DoGroundLost();
-        }
-        private void CheckForLanding(Collision c)
-        {
-            var normal = c.contacts[0].normal;
-            if (IsGrounded || NormalIsLandable(normal)) return;
-            DoLanding(c.collider);
-        }
-
-        private bool NormalIsLandable(Vector3 normal)
-        {
-            return Vector3.Angle(Vector3.up, normal) > GroundAngle;
-        }
-
-        private void DoGroundLost()
-        {
-            groundLostTime = Time.time;
-            IsGrounded = false;
-            groundColliders.Clear();
-            maxHeightSinceLastGrounding = transform.position.y;
-        }
+       
 
         /// <summary>
         /// collects ALL child colliders, this method is really just a context menu helper
@@ -145,9 +113,16 @@ namespace BardicBytes.BardicPlatformer
 
         protected override void ActorUpdate()
         {
-            if (InputSource.MovementInputData.jumpDown || (InputSource.MovementInputData.jumpHeld && Config.JumpOnHold))
+            if (InputSource.MovementInputData.jumpRelease)
             {
-                MakeJumpRequest();
+                jumpReleasedSincePressed = true;
+                Debug.Log(Time.frameCount + " jump released");
+
+            }
+            else if (InputSource.MovementInputData.jumpDown || (InputSource.MovementInputData.jumpHeld && Config.JumpOnHold))
+            {
+                hasJumpRequest = true;
+                Debug.Log(Time.frameCount+" jump request made");
             }
 
             Vector3 lap = bodyLookTarget.position + Actor.Rigidbody.velocity;
@@ -159,34 +134,6 @@ namespace BardicBytes.BardicPlatformer
             }
         }
 
-        public void MakeJumpRequest()
-        {
-            hasJumpRequest = true;
-        }
-
-        private void DoLanding(Collider c)
-        {
-            Debug.Assert(c != null);
-            Debug.Assert(groundColliders != null);
-
-            groundedHeight = transform.position.y;
-            IsGrounded = true;
-            IsJumping = false;
-            AirJumpsMade = 0;
-
-            if (!groundColliders.Contains(c)) groundColliders.Add(c);
-
-            //bunnyhop
-            if (hasJumpRequest && InputSource.MovementInputData.jumpHeld)
-            {
-                MakeJumpRequest();
-            }
-            else
-            {
-                IsJumping = false;
-                hasJumpRequest = false;
-            }
-        }
         public override void CollectActorDebugInfo(System.Text.StringBuilder sb)
         {
             sb.AppendLine("<b>Platform Movement Module</b>");
@@ -214,21 +161,55 @@ namespace BardicBytes.BardicPlatformer
 
         protected override void ActorFixedUpdate()
         {
-            RecordDistFromGround();
+            UpdateGrounded();
             DoMovement();
 
-            void RecordDistFromGround()
+            void UpdateGrounded()
             {
                 RaycastHit hit = default;
-                if (!IsGrounded
-                    && Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, this.groundCastMask, QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(transform.position + Vector3.up * .015f, Vector3.down, out hit, Mathf.Infinity, this.groundCastMask, QueryTriggerInteraction.Ignore))
                 {
+                    groundHitCollider = hit.collider;
                     distFromGround = FeetY - hit.point.y;
                     groundNormal = hit.normal;
+                }
+                else
+                {
+                    groundHitCollider = null;
+                    distFromGround = float.MaxValue;
+                    groundNormal = Vector3.right;
+                }
+
+                if (!IsGrounded && NormalIsLandable(groundNormal) && distFromGround <= Config.AirJumpMinHeight && Actor.Rigidbody.velocity.y <= 0)
+                {
+                    Debug.Log(Time.frameCount + " Grounded. "+IsGrounded);
+                    groundedHeight = transform.position.y;
+                    IsGrounded = true;
+                    IsJumping = false;
+                    AirJumpsMade = 0;
+
+                    if (!groundColliders.Contains(groundHitCollider)) groundColliders.Add(groundHitCollider);
+
+                    if (!hasJumpRequest)
+                    {
+                        IsJumping = false;
+                        hasJumpRequest = false;
+                    }
+                }
+                else if(IsGrounded && ((hit.point - transform.position).sqrMagnitude > (Config.AirJumpMinHeight * Config.AirJumpMinHeight) || !NormalIsLandable(groundNormal)))
+                {
+                    groundLostTime = Time.time;
+                    IsGrounded = false;
+                    groundColliders.Clear();
+                    maxHeightSinceLastGrounding = transform.position.y;
                 }
             }
         }
 
+        private bool NormalIsLandable(Vector3 normal)
+        {
+            return Vector3.Angle(Vector3.up, normal) < GroundAngle;
+        }
         protected virtual void DoMovement()
         {
             // Calculate the maximum speed based on whether the character is grounded or not
@@ -245,7 +226,7 @@ namespace BardicBytes.BardicPlatformer
             Vector2 direction = InputSource.MovementInputData.direction;
 
             // Calculate the move force based on the direction and the speed control multiplier
-            Vector2 moveForce = direction * Config.MoveForce * speedControlMultiplier;
+            moveForce = direction * Config.MoveForce * speedControlMultiplier;
 
             // Limit lateral control in the air
             if (!IsGrounded && !Config.CanFly) moveForce.x *= Config.AirControl;
@@ -256,8 +237,6 @@ namespace BardicBytes.BardicPlatformer
             // Prevent fastfall input force
             if (!IsGrounded && !Config.FastFall && moveForce.y < 0) moveForce.y = 0;
 
-            moveForce /= Actor.Rigidbody.mass;
-            
             // Add the move force to the rigidbody if it's allowed
             if (MayApplyMoveForce) Actor.Rigidbody.AddForce(moveForce, ForceMode.Force);
 
@@ -301,31 +280,45 @@ namespace BardicBytes.BardicPlatformer
 
         private void TryJump()
         {
-            if (!hasJumpRequest && !IsJumping)
+            if (!hasJumpRequest)
             {
                 return;
             }
-
             Vector3 jumpDir = new Vector3(InputSource.MovementInputData.direction.x, 1, 0);
+            var velocity = Actor.Rigidbody.velocity;
 
             // If the character is grounded and the jump button is pressed, start the jump
             if (IsGrounded)
             {
+                Debug.Log(Time.frameCount + "grounded jump");
+
+                velocity.y = 0;
+                Actor.Rigidbody.velocity = velocity;
+
+                jumpReleasedSincePressed = false;
                 IsJumping = true;
-                var f = jumpDir * Config.JumpPower / Actor.Rigidbody.mass;
+                IsGrounded = false;
+                var f = jumpDir * Config.JumpPower;
                 Actor.Rigidbody.AddForce(f, ForceMode.Impulse);
             }
             // If the character is in the air and is allowed to air jump and the jump button is pressed, air jump
             else if (ShouldAirJump)
             {
+                Debug.Log(Time.frameCount + "air jump");
+
+                velocity.y = 0;
+                Actor.Rigidbody.velocity = velocity;
+
                 AirJumpsMade++;
-                var f = jumpDir * Config.JumpPower / Actor.Rigidbody.mass;
+                var f = jumpDir * Config.JumpPower;
                 Actor.Rigidbody.AddForce(f, ForceMode.Impulse);
             }
             // If the character is in the air and is holding the jump button, apply a constant upward force to extend the jump
             else if (IsJumping && LastJumpHeight < Config.MaxJumpHeight)
             {
-                var f = jumpDir * Config.JumpHoldPower / Actor.Rigidbody.mass;
+                Debug.Log(Time.frameCount + "extend jump");
+
+                var f = jumpDir * Config.JumpHoldPower;
                 Actor.Rigidbody.AddForce(f, ForceMode.Force);
             }
 

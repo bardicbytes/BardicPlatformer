@@ -48,7 +48,7 @@ namespace BardicBytes.BardicPlatformerEditor
                 var instancer = Target.Actor.GetModule<EventVarInstancer>();
                 //the serialized index of the platform movement config selected
                 int configIndex = -1;
-                if(instancer.HasInstance(sourceEV))
+                if (instancer.HasInstance(sourceEV))
                 {
                     var ic = instancer.FindInstanceData(sourceEV);
                     configIndex = ic.IntValue;
@@ -64,7 +64,7 @@ namespace BardicBytes.BardicPlatformerEditor
                     configSO = new SerializedObject(mc);
                     configPropHelper = new PropertyFieldHelper(configSO);
                 }
-                else if(fallbackValue != null) //srcEV is ignored, use fallback value
+                else if (fallbackValue != null) //srcEV is ignored, use fallback value
                 {
                     PrepFallBackProp();
                 }
@@ -73,7 +73,7 @@ namespace BardicBytes.BardicPlatformerEditor
                     configPropHelper = null;
                 }
             }
-            else if(fallbackValue != null) //srcEV is ignored, use fallback value
+            else if (fallbackValue != null) //srcEV is ignored, use fallback value
             {
                 PrepFallBackProp();
             }
@@ -104,11 +104,11 @@ namespace BardicBytes.BardicPlatformerEditor
 
             GUILayout.Space(10f);
             string headerText = "";
-            if(srcEVp.objectReferenceValue == null && fallbackP.objectReferenceValue != null)
+            if (srcEVp.objectReferenceValue == null && fallbackP.objectReferenceValue != null)
             {
                 headerText = fallbackP.displayName + " (Fallback)";
             }
-            else if(srcEVp.objectReferenceValue != null)
+            else if (srcEVp.objectReferenceValue != null)
             {
                 headerText = configSO.targetObject.name + " " + (hasInstance ? " *Instance" : " *Asset");
             }
