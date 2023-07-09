@@ -13,8 +13,8 @@ namespace BardicBytes.BardicPlatformer
         public override void StartAction()
         {
             base.StartAction();
-            action.attackFX.Play(actionPerformer.AttackFXTarget);
-            Debug.Log("Attack! " + action.name + " " + actionPerformer.AttackPower.Value);
+            base.action.attackFX.Play(base.actionPerformer.AttackFXTarget);
+            Debug.Log("Attack! " + action.name + " " + base.actionPerformer.AttackPower.Value);
         }
     }
 }

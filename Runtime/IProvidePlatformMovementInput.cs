@@ -5,5 +5,7 @@ namespace BardicBytes.BardicPlatformer
     public interface IProvidePlatformMovementInput
     {
         PlatformMovementInputData MovementInputData { get; }
+
+        void BeginMaskingHorizontal();
     }
 }

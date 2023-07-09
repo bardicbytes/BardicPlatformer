@@ -19,6 +19,8 @@ namespace BardicBytes.BardicPlatformer
         public LayerMask groundCastMask { get; protected set; } = -1;
         [field: SerializeField]
         public Collider[] Colliders { get; protected set; }
+        [field: SerializeField]
+        public float CoyoteTime { get; protected set; } = .01f;
 
         [field: Range(0, 180)]
         [field: SerializeField]
@@ -50,7 +52,7 @@ namespace BardicBytes.BardicPlatformer
 
         private bool jumpReleasedSincePressed = false;
 
-        private bool IsWithinCoyoteTime => !IsJumping && (Time.time - groundLostTime) <= Config.CoyoteTime;
+        private bool IsWithinCoyoteTime => !IsJumping && (Time.time - groundLostTime) <= CoyoteTime;
         private float FeetY => Actor.transform.position.y;
         private bool ShouldAirJump => !IsGrounded
                     && jumpReleasedSincePressed

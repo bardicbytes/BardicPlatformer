@@ -26,7 +26,7 @@ namespace BardicBytes.BardicPlatformer
         [field: SerializeField]
         public bool AirStop { get; protected set; } = false;
         [field: SerializeField]
-        public float CoyoteTime { get; protected set; } = .01f;
+        public float WallJumpInputInturrupt { get; protected set; } = .1f;
         [field: SerializeField]
         public float AirJumpMinHeight { get; protected set; } = .15f;
         [field: SerializeField]
@@ -40,6 +40,8 @@ namespace BardicBytes.BardicPlatformer
 
         [field: SerializeField]
         public PhysicMaterial Material { get; protected set; }
+        [field: SerializeField]
+        public PhysicsMaterial2D Material2D { get; protected set; }
         [field: SerializeField]
         public bool CanFly { get; protected set; }
         [field: SerializeField]
@@ -61,6 +63,16 @@ namespace BardicBytes.BardicPlatformer
             {
                 colliders[i].sharedMaterial = Material;
             }
+        }
+
+        public void Apply(PlatformerBody2D body)
+        {
+            body.RigidBody2D.isKinematic = RigidbodyConfig.isKinematic;
+            body.RigidBody2D.gravityScale = RigidbodyConfig.useGravity ? RigidbodyConfig.gravityScale2D : 0;
+            body.RigidBody2D.drag = RigidbodyConfig.drag;
+            body.RigidBody2D.angularDrag = RigidbodyConfig.angularDrag;
+
+            body.Collider.sharedMaterial = Material2D;
         }
     }
 }
