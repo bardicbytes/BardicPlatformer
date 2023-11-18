@@ -115,7 +115,7 @@ namespace BardicBytes.BardicPlatformer
 
         protected override void ActorUpdate()
         {
-            if (InputSource.MovementInputData.jumpRelease)
+            if (InputSource.MovementInputData.jumpUp)
             {
                 jumpReleasedSincePressed = true;
                 Debug.Log(Time.frameCount + " jump released");

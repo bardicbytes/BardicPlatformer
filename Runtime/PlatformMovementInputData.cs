@@ -8,6 +8,6 @@ namespace BardicBytes.BardicPlatformer
         public Vector2 direction;
         public bool jumpDown;
         public bool jumpHeld;
-        public bool jumpRelease;
+        public bool jumpUp;
     }
 }

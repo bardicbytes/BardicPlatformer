@@ -14,7 +14,17 @@ namespace BardicBytes.BardicPlatformer
         [field: SerializeField] public SoundEffect LandingSFX { get; protected set; }
 
         public float GroundCheckRadius { get; protected set; } = 0.2f;
-        public bool IsGrounded { get; protected set; } = true;
+        public bool IsGrounded { 
+            get
+            {
+                return this.isGrounded;
+            } protected set
+            {
+                bool was = this.isGrounded;
+                this.isGrounded = value;
+                if (!was && this.isGrounded) justGrounded?.Invoke();
+            } 
+        }
 
         [field: SerializeField] public Rigidbody2D RigidBody2D { get; protected set; }
         [field: SerializeField] public Animator Animator { get; protected set; }
@@ -39,11 +49,14 @@ namespace BardicBytes.BardicPlatformer
         public bool IsWithinCoyoteTime => (Time.time - groundLostTime) <= CoyoteTime;
 
         private float FeetY => Actor.transform.position.y;
-        
+
+        private bool isGrounded = true;
         private Collider2D groundHitCollider;
         private Vector2 groundNormal;
         private List<Collider2D> groundColliders;
         private float groundLostTime = 0;
+
+        public event System.Action justGrounded;
 
         protected override void OnValidate()
         {
